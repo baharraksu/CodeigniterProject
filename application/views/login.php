@@ -28,6 +28,9 @@
                 </div>
                 <button type="submit" class="btn btn-primary w-100">Giriş Yap</button>
             </form>
+            <div class="mt-3 text-center">
+                <p>Hesabınız yok mu? <a href="<?php echo site_url('register'); ?>">Kayıt Olun</a></p>
+            </div>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
