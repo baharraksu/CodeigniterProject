@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Giriş Yap</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 
 <body class="bg-light">
@@ -26,6 +27,12 @@
                     <label for="password" class="form-label">Şifre</label>
                     <input type="password" class="form-control" name="password" id="password" required>
                 </div>
+
+                <!-- Google reCAPTCHA -->
+                <div class="mb-3">
+                    <div class="g-recaptcha" data-sitekey="6LdncpEqAAAAAFwWhxtH03zBklGAg21U4fevZRqp"></div>
+                </div>
+
                 <button type="submit" class="btn btn-primary w-100">Giriş Yap</button>
             </form>
             <div class="mt-3 text-center">
