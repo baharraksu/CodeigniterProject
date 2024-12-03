@@ -26,25 +26,10 @@ class Login extends CI_Controller
     {
         $this->form_validation->set_rules('username', 'Kullanıcı Adı', 'required');
         $this->form_validation->set_rules('password', 'Şifre', 'required');
-        $this->form_validation->set_rules('g-recaptcha-response', 'Doğrulama Kodu', 'required');
 
         if ($this->form_validation->run() == FALSE) {
             $this->load->view('login');
         } else {
-            // Google reCAPTCHA doğrulaması
-            $recaptchaResponse = $this->input->post('g-recaptcha-response');
-            $secretKey = ''; // Google reCAPTCHA Secret Key
-            $verifyUrl = "https://www.google.com/recaptcha/api/siteverify";
-
-            $response = file_get_contents($verifyUrl . "?secret={$secretKey}&response={$recaptchaResponse}");
-            $status = json_decode($response, true);
-
-            if (!$status['success']) {
-                $this->session->set_flashdata('error', 'reCAPTCHA doğrulaması başarısız.');
-                redirect('login');
-            }
-
-            // Kullanıcı doğrulaması
             $username = $this->input->post('username');
             $password = $this->input->post('password');
 
