@@ -54,6 +54,7 @@ $route['register'] = 'register/index';
 $route['login'] = 'login/index';
 $route['dashboard'] = 'dashboard/index';
 $route['admin'] = 'admin/index';
+
 $route['login/logout'] = 'login/logout'; // Çıkış işlemi
 
 
