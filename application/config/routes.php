@@ -54,6 +54,11 @@ $route['register'] = 'register/index';
 $route['login'] = 'login/index';
 $route['dashboard'] = 'dashboard/index';
 $route['admin'] = 'admin/index';
+$route['product/list'] = 'product/list';
+$route['product/add'] = 'product/add';
+$route['product/edit/(:num)'] = 'product/edit/$1';
+$route['product/update/(:num)'] = 'product/update/$1';
+$route['product/delete/(:num)'] = 'product/delete/$1';
 
 $route['login/logout'] = 'login/logout'; // Çıkış işlemi
 

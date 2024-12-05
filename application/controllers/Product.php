@@ -34,12 +34,63 @@ class Product extends CI_Controller
         ];
 
         // Model aracılığıyla veritabanına kaydet
-        if ($this->Product_model->add_product($data)) {
+        if ($this->Product_model->insert_product($data)) {
             $this->session->set_flashdata('success', 'Ürün başarıyla eklendi.');
             redirect('product/list'); // Ürün listeleme sayfasına yönlendirme
         } else {
             $this->session->set_flashdata('error', 'Ürün eklenemedi.');
             redirect('product/add'); // Ürün ekleme sayfasına geri dön
         }
+    }
+
+    // Ürünleri listele
+    public function list()
+    {
+        $data['products'] = $this->Product_model->get_all_products(); // Ürünleri al
+        $this->load->view('product_list', $data); // Ürün listeleme sayfasını yükle
+    }
+
+    // Ürün düzenleme formunu yükle
+    public function edit($id)
+    {
+        $data['product'] = $this->Product_model->get_product_by_id($id); // ID'ye göre ürünü al
+        if (empty($data['product'])) {
+            $this->session->set_flashdata('error', 'Ürün bulunamadı.');
+            redirect('product/list');
+        }
+        $this->load->view('product_edit', $data); // Ürün düzenleme formunu yükle
+    }
+
+    // Ürün güncelleme işlemi
+    public function update($id)
+    {
+        // Formdan gelen verileri al
+        $data = [
+            'name'       => $this->input->post('name'),
+            'description' => $this->input->post('description'),
+            'price'      => $this->input->post('price'),
+            'updated_at' => date('Y-m-d H:i:s'),
+        ];
+
+        // Model aracılığıyla ürünü güncelle
+        if ($this->Product_model->update_product($id, $data)) {
+            $this->session->set_flashdata('success', 'Ürün başarıyla güncellendi.');
+            redirect('product/list');
+        } else {
+            $this->session->set_flashdata('error', 'Ürün güncellenemedi.');
+            redirect('product/edit/' . $id);
+        }
+    }
+
+    // Ürün silme işlemi
+    public function delete($id)
+    {
+        // Model aracılığıyla ürünü sil
+        if ($this->Product_model->delete_product($id)) {
+            $this->session->set_flashdata('success', 'Ürün başarıyla silindi.');
+        } else {
+            $this->session->set_flashdata('error', 'Ürün silinemedi.');
+        }
+        redirect('product/list');
     }
 }

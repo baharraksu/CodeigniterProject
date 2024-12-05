@@ -3,15 +3,36 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Product_model extends CI_Model
 {
-
+    // Ürün Ekleme (Create)
     public function insert_product($data)
     {
         return $this->db->insert('products', $data);  // Veritabanına ürün ekleme
     }
 
-    // Ürünleri al
+    // Tüm Ürünleri Getirme (Read)
     public function get_all_products()
     {
         return $this->db->get('products')->result_array();  // Bütün ürünleri getir
+    }
+
+    // Ürün Bilgilerini Getirme (ID'ye göre)
+    public function get_product_by_id($id)
+    {
+        $this->db->where('id', $id);
+        return $this->db->get('products')->row_array();  // Belirtilen ID'ye sahip ürünü getir
+    }
+
+    // Ürün Güncelleme (Update)
+    public function update_product($id, $data)
+    {
+        $this->db->where('id', $id);
+        return $this->db->update('products', $data);  // Ürünü güncelle
+    }
+
+    // Ürün Silme (Delete)
+    public function delete_product($id)
+    {
+        $this->db->where('id', $id);
+        return $this->db->delete('products');  // Ürünü sil
     }
 }
