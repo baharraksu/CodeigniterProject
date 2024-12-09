@@ -16,10 +16,13 @@ class Product_model extends CI_Model
     }
 
     // Ürün Bilgilerini Getirme (ID'ye göre)
-    public function get_product_by_id($id)
+    public function getProductById($product_id)
     {
-        $this->db->where('id', $id);
-        return $this->db->get('products')->row_array();  // Belirtilen ID'ye sahip ürünü getir
+        $this->db->select('id, name, price');
+        $this->db->from('products');
+        $this->db->where('id', $product_id);
+        $query = $this->db->get();
+        return $query->row_array(); // İlk ürünü döndürür
     }
 
     // Ürün Güncelleme (Update)

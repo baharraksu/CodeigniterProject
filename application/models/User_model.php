@@ -12,4 +12,9 @@ class User_model extends CI_Model
     {
         return $this->db->get_where('users', ['email' => $email])->row_array();
     }
+    public function getUserAddresses($userId)
+    {
+        $this->db->where('user_id', $userId);
+        return $this->db->get('addresses')->result_array();
+    }
 }

@@ -60,7 +60,7 @@
 
                 <div class="d-flex justify-content-between mt-3">
                     <button type="submit" class="btn btn-warning text-white">Sepeti Güncelle</button>
-                    <a href="<?= site_url('checkout') ?>" class="btn btn-success text-white">Ödeme Sayfasına Git</a>
+                    <a href="<?= site_url('CheckoutController') ?>" class="btn btn-success text-white">Ödeme Sayfasına Git</a>
                 </div>
             </form>
         <?php else: ?>

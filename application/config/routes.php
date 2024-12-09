@@ -59,6 +59,19 @@ $route['product/add'] = 'product/add';
 $route['product/edit/(:num)'] = 'product/edit/$1';
 $route['product/update/(:num)'] = 'product/update/$1';
 $route['product/delete/(:num)'] = 'product/delete/$1';
+$route['checkout'] = 'CheckoutController/index';
+$route['checkout/completeOrder'] = 'CheckoutController/completeOrder';
+$route['order/success'] = 'ordercontroller/success';
+
+
+$route['trendyol/products'] = 'Trendyol/getProducts';
+$route['trendyol/addresses'] = 'Trendyol/getAddresses';
+$route['trendyol/brands'] = 'Trendyol/getBrands';
+$route['trendyol/orders'] = 'Trendyol/getOrders';
+
+$route['trendyol/categories'] = 'Trendyol/categories';
+
+
 
 $route['login/logout'] = 'login/logout'; // Çıkış işlemi
 
