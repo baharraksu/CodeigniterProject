@@ -10,9 +10,9 @@
 <body>
     <h1>Kategoriler</h1>
     <ul>
-        <?php if (isset($categories)): ?>
+        <?php if (!empty($categories)): ?>
             <?php foreach ($categories as $category): ?>
-                <li><?= isset($category['categoryName']) ? $category['categoryName'] : 'Kategori adı yok' ?></li>
+                <li><?= isset($category['name']) ? $category['name'] : 'Kategori adı yok' ?></li>
             <?php endforeach; ?>
         <?php else: ?>
             <p>Kategori bulunamadı.</p>

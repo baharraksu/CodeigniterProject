@@ -77,9 +77,15 @@ class Trendyol extends CI_Controller
     }
     public function categories()
     {
-        $categories = $this->Trendyol_model->getCategories(); // Kategorileri Trendyol API'den çek
-        echo "<pre>";
-        print_r($categories); // Gelen yanıtı detaylı şekilde incelemek için ekrana yazdır
-        echo "</pre>";
+        $categoriesData = $this->Trendyol_model->getCategories();
+
+        if ($categoriesData['status_code'] === 200) {
+            $categories = $categoriesData['response']['categories']; // API'den gelen kategoriler
+        } else {
+            $categories = []; // Hata durumunda boş dizi
+        }
+
+        // View dosyasını çağırırken yolu doğru ayarlayın
+        $this->load->view('trendyol/category_view', ['categories' => $categories]);
     }
 }
