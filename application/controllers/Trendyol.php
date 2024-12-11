@@ -22,20 +22,22 @@ class Trendyol extends CI_Controller
     public function products()
     {
         $products = $this->Trendyol_model->getProducts(); // Trendyol API'den ürünleri çek
-        $categoriesData = $this->Trendyol_model->getCategories(); // Get categories from Trendyol API
+        $categoriesData = $this->Trendyol_model->getCategories(); // Kategorileri al
 
         if ($categoriesData['status_code'] == 200) {
-            $categories = $categoriesData['response']; // Assuming response contains the categories
+            $categories = $categoriesData['response']; // Sadece kategori isimleri
         } else {
-            $categories = []; // Handle failure in fetching categories
+            $categories = []; // Kategoriler alınamadığında boş dizi
         }
 
         echo "<pre>";
-        print_r($products); // Gelen veriyi detaylı olarak görüntüle
+        print_r($categories); // Kategori isimlerini ekrana yazdır
         echo "</pre>";
 
+        // Kategorileri ve ürünleri view'a gönder
         $this->load->view('trendyol/products', ['products' => $products['response'], 'categories' => $categories]);
     }
+
 
 
     public function getAddresses()
@@ -75,6 +77,7 @@ class Trendyol extends CI_Controller
             show_error("Trendyol API'den veri çekme başarısız! Status Code: " . $data['status_code']);
         }
     }
+
     public function categories()
     {
         $categoriesData = $this->Trendyol_model->getCategories();
@@ -86,6 +89,6 @@ class Trendyol extends CI_Controller
         }
 
         // View dosyasını çağırırken yolu doğru ayarlayın
-        $this->load->view('trendyol/category_view', ['categories' => $categories]);
+        $this->load->view('dashboard', ['categories' => $categories]);
     }
 }

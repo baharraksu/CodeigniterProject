@@ -69,7 +69,8 @@ $route['trendyol/addresses'] = 'Trendyol/getAddresses';
 $route['trendyol/brands'] = 'Trendyol/getBrands';
 $route['trendyol/orders'] = 'Trendyol/getOrders';
 
-$route['trendyol/categories'] = 'Trendyol/categories';
+
+
 
 
 

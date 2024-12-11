@@ -40,11 +40,11 @@ class Trendyol_model extends CI_Model
         $endpoint = "/suppliers/{$this->supplier_id}/products?page={$page}&size={$size}&approved=True";
         return $this->sendRequest($endpoint);
     }
-    public function getCategories()
-    {
-        $endpoint = "/product-categories"; // Example endpoint to get product categories
-        return $this->sendRequest($endpoint);
-    }
+    // public function getCategories()
+    // {
+    //     $endpoint = "/product-categories"; // Example endpoint to get product categories
+    //     return $this->sendRequest($endpoint);
+    // }
 
 
     public function getAddresses()
@@ -83,12 +83,19 @@ class Trendyol_model extends CI_Model
             echo "Veri alınamadı. Hata kodu: " . $products['status_code'];
         }
     }
-    public function get_categories()
+    public function getCategories()
     {
-        $this->db->select('categoryName'); // Kategori adını almak istiyoruz
-        $this->db->from('categories'); // categories tablosu
-        $query = $this->db->get();
+        $endpoint = "/product-categories"; // API'den kategorileri al
+        $data = $this->sendRequest($endpoint);
 
-        return $query->result_array(); // Verileri dizi olarak döndürüyoruz
+        if ($data['status_code'] == 200) {
+            // Gelen kategorilerden sadece 'name' değerini alıyoruz
+            $categories = array_map(function ($category) {
+                return $category['name']; // Sadece kategori adını al
+            }, $data['response']['categories']); // categories altındaki her kategoriden 'name' değerini döndür
+            return ['status_code' => 200, 'response' => $categories];
+        } else {
+            return ['status_code' => $data['status_code'], 'response' => []];
+        }
     }
 }
